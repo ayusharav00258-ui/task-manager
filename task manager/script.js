@@ -51,19 +51,13 @@ function renderTasks() {
         <span>${task.text}</span>
         <small>Priority: ${task.priority} ${task.deadline ? '| Deadline: ' + task.deadline : ''}</small>
       </div>
-  <li.innerHTML = `
-    <div class="task-info">
-      <span>${task.text}</span>
-      <small>Priority: ${task.priority} ${task.deadline ? '| Deadline: ' + task.deadline : ''}</small>
-  </div>
-  <div class="task-actions">
-    <button class="edit-btn" onclick="editTask(${task.id})">✏️</button>
-    <button class="complete-btn" onclick="toggleComplete(${task.id})">
-      ${task.completed ? '↩️' : '✔️'}
-    </button>
-    <button class="delete-btn" onclick="deleteTask(${task.id})">🗑️</button>
-  </div>
-`;
+      <div class="task-actions">
+        <button class="complete-btn" onclick="toggleComplete(${task.id})">
+          ${task.completed ? '↩️' : '✔️'}
+        </button>
+        <button class="edit-btn" onclick="editTask(${task.id})">✏️</button>
+        <button class="delete-btn" onclick="deleteTask(${task.id})">🗑️</button>
+      </div>
     `;
     list.appendChild(li);
   });
@@ -83,6 +77,18 @@ function deleteTask(id) {
   renderTasks();
 }
 
+// Task edit
+function editTask(id) {
+  const task = tasks.find(t => t.id === id);
+  const newText = prompt('Task edit karo:', task.text);
+  
+  if (newText !== null && newText.trim() !== '') {
+    task.text = newText.trim();
+    saveTasks();
+    renderTasks();
+  }
+}
+
 // Filter
 function filterTasks(type) {
   currentFilter = type;
@@ -96,14 +102,3 @@ function saveTasks() {
 
 // Page load pe tasks dikhao
 renderTasks();
-function editTask(id) {
-  const task = tasks.find(t => t.id === id);
-  const newText = prompt('Task edit karo:', task.text);
-  
-  if (newText !== null && newText.trim() !== '') {
-    task.text = newText.trim();
-    saveTasks();
-    renderTasks();
-  }
-}
-.edit-btn { background: #3498db; color: white; }
