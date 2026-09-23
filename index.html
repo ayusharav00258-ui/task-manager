@@ -7,8 +7,18 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <script>
+  // Agar user logged in nahi hai, toh login page pe bhejo
+  if (!localStorage.getItem('currentUser')) {
+    window.location.href = 'login.html';
+  }
+</script>
   <div class="container">
     <h1>📋 Task Manager</h1>
+    <div class="user-bar">
+  <span id="welcomeUser">👤 User</span>
+  <button onclick="logout()" class="logout-btn">🚪 Logout</button>
+</div>
     <button id="themeToggle" class="theme-btn" onclick="toggleTheme()">🌙 Dark Mode</button>
     <div class="stats">
   <span>Total: <b id="totalCount">0</b></span>

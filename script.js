@@ -136,6 +136,17 @@ function searchTasks() {
   searchQuery = document.getElementById('searchInput').value;
   renderTasks();
 }
+// User ka naam dikhao
+const currentUser = localStorage.getItem('currentUser');
+if (currentUser && document.getElementById('welcomeUser')) {
+  document.getElementById('welcomeUser').textContent = '👤 ' + currentUser;
+}
+
+// Logout function
+function logout() {
+  localStorage.removeItem('currentUser');
+  window.location.href = 'login.html';
+}
 renderTasks();
 // Export tasks
 function exportTasks() {

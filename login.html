@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - Task Manager</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container login-container">
+    <h1>🔐 Login</h1>
+
+    <div class="auth-form">
+      <input type="text" id="username" placeholder="Username" />
+      <input type="password" id="password" placeholder="Password" />
+      <button onclick="login()">Login</button>
+      <button class="signup-btn" onclick="signup()">New User? Sign Up</button>
+    </div>
+
+    <p id="message"></p>
+  </div>
+
+  <script src="auth.js"></script>
+</body>
+</html>
