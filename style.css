@@ -203,3 +203,107 @@ body.dark .filters button {
   background: transparent;
   color: #667eea;
 }
+.search-box {
+  margin-bottom: 15px;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  font-size: 14px;
+  outline: none;
+  transition: 0.3s;
+}
+
+.search-box input:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 8px rgba(102, 126, 234, 0.3);
+}
+
+body.dark .search-box input {
+  background: #2a2a3e;
+  color: #eee;
+  border-color: #444;
+}
+.data-actions {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+  justify-content: center;
+}
+
+.data-actions button {
+  padding: 8px 16px;
+  border: 1px solid #667eea;
+  background: white;
+  color: #667eea;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: 0.3s;
+}
+
+.data-actions button:hover {
+  background: #667eea;
+  color: white;
+}
+
+body.dark .data-actions button {
+  background: transparent;
+  color: #667eea;
+}
+/* Task add hone pe fade-in */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#taskList li {
+  animation: fadeIn 0.3s ease;
+  transition: 0.3s;
+}
+
+#taskList li:hover {
+  transform: translateX(5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Buttons smooth */
+button {
+  transition: all 0.2s ease;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+/* Task complete hone pe */
+#taskList li.completed {
+  animation: fadeIn 0.3s ease;
+}
+
+/* Container animation */
+.container {
+  animation: fadeIn 0.5s ease;
+}
+
+/* Delete button hover */
+.delete-btn:hover { background: #c0392b !important; }
+.edit-btn:hover { background: #2980b9 !important; }
+.complete-btn:hover { background: #27ae60 !important; }
+.category-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  margin-top: 4px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.category-work { background: #3498db; color: white; }
+.category-personal { background: #e74c3c; color: white; }
+.category-study { background: #f39c12; color: white; }
+.category-general { background: #95a5a6; color: white; }

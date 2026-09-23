@@ -1,4 +1,5 @@
 let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+let searchQuery = '';
 let currentFilter = 'all';
 
 // Task add karna
@@ -11,14 +12,16 @@ function addTask() {
     alert('Task likho pehle!');
     return;
   }
-
+  const category = document.getElementById('category').value;
   const task = {
     id: Date.now(),
     text: input.value,
     priority: priority,
     deadline: deadline,
+    category: category,
     completed: false,
   };
+  
 
   tasks.push(task);
   saveTasks();
@@ -36,7 +39,10 @@ function renderTasks() {
   let filtered = tasks;
   if (currentFilter === 'pending') filtered = tasks.filter(t => !t.completed);
   if (currentFilter === 'completed') filtered = tasks.filter(t => t.completed);
-
+    // Search filter
+  if (searchQuery) {
+    filtered = filtered.filter(t => t.text.toLowerCase().includes(searchQuery.toLowerCase()));
+  }
   if (filtered.length === 0) {
     list.innerHTML = '<p style="text-align:center;color:#999;">Koi task nahi hai</p>';
     return;
@@ -50,7 +56,8 @@ function renderTasks() {
     li.innerHTML = `
       <div class="task-info">
         <span>${task.text}</span>
-        <small>Priority: ${task.priority} ${task.deadline ? '| Deadline: ' + task.deadline : ''}</small>
+                <small>Priority: ${task.priority} ${task.deadline ? '| Deadline: ' + task.deadline : ''}</small>
+        <span class="category-tag category-${task.category || 'general'}">${task.category || 'general'}</span>
       </div>
       <div class="task-actions">
         <button class="complete-btn" onclick="toggleComplete(${task.id})">
@@ -124,4 +131,44 @@ if (localStorage.getItem('theme') === 'dark') {
   document.body.classList.add('dark');
   document.getElementById('themeToggle').textContent = '☀️ Light Mode';
 }
+// Search function
+function searchTasks() {
+  searchQuery = document.getElementById('searchInput').value;
+  renderTasks();
+}
 renderTasks();
+// Export tasks
+function exportTasks() {
+  const dataStr = JSON.stringify(tasks, null, 2);
+  const blob = new Blob([dataStr], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'tasks-backup.json';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// Import tasks
+function importTasks(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const imported = JSON.parse(e.target.result);
+      if (Array.isArray(imported)) {
+        tasks = imported;
+        saveTasks();
+        renderTasks();
+        alert('✅ Tasks imported successfully!');
+      } else {
+        alert('❌ Invalid file format');
+      }
+    } catch (err) {
+      alert('❌ File read nahi ho payi');
+    }
+  };
+  reader.readAsText(file);
+}

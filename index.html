@@ -24,14 +24,28 @@
         <option value="high">High</option>
       </select>
       <input type="date" id="deadline" />
+      <select id="category">
+  <option value="general">📁 General</option>
+  <option value="work">💼 Work</option>
+  <option value="personal">🏠 Personal</option>
+  <option value="study">📚 Study</option>
+</select>
       <button onclick="addTask()">Add Task</button>
     </div>
-
+  <div class="search-box">
+  <input type="text" id="searchInput" placeholder="🔍 Task search karo..." oninput="searchTasks()" />
+</div>
     <!-- Filter buttons -->
     <div class="filters">
       <button onclick="filterTasks('all')">All</button>
       <button onclick="filterTasks('pending')">Pending</button>
       <button onclick="filterTasks('completed')">Completed</button>
+    </div>
+        <!-- Export / Import buttons -->
+    <div class="data-actions">
+      <button onclick="exportTasks()">📤 Export</button>
+      <button onclick="document.getElementById('importFile').click()">📥 Import</button>
+      <input type="file" id="importFile" accept=".json" style="display:none;" onchange="importTasks(event)" />
     </div>
 
     <!-- Task list yahan dikhegi -->
