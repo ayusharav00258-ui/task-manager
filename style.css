@@ -121,3 +121,85 @@ h1 {
 
 .complete-btn { background: #2ecc71; color: white; }
 .delete-btn { background: #e74c3c; color: white; }
+.stats {
+  display: flex;
+  justify-content: space-around;
+  background: #f0f0f8;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  font-size: 14px;
+  color: #555;
+}
+
+.stats b {
+  color: #667eea;
+  font-size: 16px;
+}
+#taskList li.overdue {
+  background: #ffe5e5;
+  border-left-color: #e74c3c !important;
+}
+
+#taskList li.overdue small {
+  color: #e74c3c;
+  font-weight: bold;
+}
+#taskList li.overdue {
+  background: #ffe5e5 !important;
+  border-left: 5px solid #e74c3c !important;
+}
+
+#taskList li.overdue span {
+  color: #c0392b !important;
+  font-weight: bold;
+}
+
+#taskList li.overdue small {
+  color: #e74c3c !important;
+  font-weight: bold;
+}
+.theme-btn {
+  display: block;
+  margin: 0 auto 15px;
+  padding: 8px 16px;
+  border: 1px solid #667eea;
+  background: white;
+  color: #667eea;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+body.dark {
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+}
+
+body.dark .container {
+  background: #1e1e2f;
+  color: #eee;
+}
+
+body.dark h1 { color: #fff; }
+
+body.dark .task-form input,
+body.dark .task-form select {
+  background: #2a2a3e;
+  color: #eee;
+  border-color: #444;
+}
+
+body.dark #taskList li {
+  background: #2a2a3e;
+  color: #eee;
+}
+
+body.dark .stats {
+  background: #2a2a3e;
+  color: #ccc;
+}
+
+body.dark .filters button {
+  background: transparent;
+  color: #667eea;
+}

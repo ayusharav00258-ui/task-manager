@@ -43,8 +43,9 @@ function renderTasks() {
   }
 
   filtered.forEach(task => {
+        const isOverdue = task.deadline && new Date(task.deadline) < new Date() && !task.completed;
     const li = document.createElement('li');
-    li.className = task.priority + (task.completed ? ' completed' : '');
+       li.className = task.priority + (task.completed ? ' completed' : '') + (isOverdue ? ' overdue' : '');
 
     li.innerHTML = `
       <div class="task-info">
@@ -61,6 +62,10 @@ function renderTasks() {
     `;
     list.appendChild(li);
   });
+    // Task counter update
+  document.getElementById('totalCount').textContent = tasks.length;
+  document.getElementById('completedCount').textContent = tasks.filter(t => t.completed).length;
+  document.getElementById('pendingCount').textContent = tasks.filter(t => !t.completed).length;
 }
 
 // Task complete/pending toggle
@@ -101,4 +106,22 @@ function saveTasks() {
 }
 
 // Page load pe tasks dikhao
+// Dark mode toggle
+function toggleTheme() {
+  document.body.classList.toggle('dark');
+  const btn = document.getElementById('themeToggle');
+  if (document.body.classList.contains('dark')) {
+    btn.textContent = '☀️ Light Mode';
+    localStorage.setItem('theme', 'dark');
+  } else {
+    btn.textContent = '🌙 Dark Mode';
+    localStorage.setItem('theme', 'light');
+  }
+}
+
+// Page load pe theme yaad rakho
+if (localStorage.getItem('theme') === 'dark') {
+  document.body.classList.add('dark');
+  document.getElementById('themeToggle').textContent = '☀️ Light Mode';
+}
 renderTasks();
