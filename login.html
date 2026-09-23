@@ -12,7 +12,10 @@
 
     <div class="auth-form">
       <input type="text" id="username" placeholder="Username" />
-      <input type="password" id="password" placeholder="Password" />
+      <div class="password-wrapper">
+  <input type="password" id="password" placeholder="Password" />
+  <span class="toggle-password" onclick="togglePassword()">👁️</span>
+</div>
       <button onclick="login()">Login</button>
       <button class="signup-btn" onclick="signup()">New User? Sign Up</button>
     </div>

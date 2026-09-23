@@ -1,7 +1,7 @@
-let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-let searchQuery = '';
+const currentUser = localStorage.getItem('currentUser') || 'guest';
+let tasks = JSON.parse(localStorage.getItem('tasks_' + currentUser)) || [];
 let currentFilter = 'all';
-
+let searchQuery = '';
 // Task add karna
 function addTask() {
   const input = document.getElementById('taskInput');
@@ -109,7 +109,7 @@ function filterTasks(type) {
 
 // LocalStorage mein save
 function saveTasks() {
-  localStorage.setItem('tasks', JSON.stringify(tasks));
+  localStorage.setItem('tasks_' + currentUser, JSON.stringify(tasks));
 }
 
 // Page load pe tasks dikhao
@@ -137,7 +137,7 @@ function searchTasks() {
   renderTasks();
 }
 // User ka naam dikhao
-const currentUser = localStorage.getItem('currentUser');
+
 if (currentUser && document.getElementById('welcomeUser')) {
   document.getElementById('welcomeUser').textContent = '👤 ' + currentUser;
 }
